@@ -14,15 +14,22 @@ public class order_and_pick_up {
 		String[] phoneNumbers = { "0631111111", "063222222", "063333333", "064444444", "065555555", "066666666" };
 		double totalPrice = 0;
 		String phone = "0";
+
 		System.out.println("Izvolite!");
 		System.out.print("Izaberite sastojke za pastu: ");
 		String ingredientName = "";
 		ingredientName = s.nextLine();
 		while (!ingredientName.equals("Poruci")) {
+			if(isValid(ingredients, ingredientName)) {
 				int priceIndex = findIngredient(ingredients, ingredientName);
 				totalPrice = totalPrice + price[priceIndex];
 				System.out.print("Izaberite sastojke za pastu: ");
 				ingredientName = s.nextLine();
+			} else {
+				System.out.print("Zeljeni sastojak nemamo u ponudi. Molimo vas izaberite ponovo: ");
+				ingredientName = s.nextLine();
+			}
+			
 			}
 		System.out.print("Unesite vas broj telefona: ");
 		phone = s.next();
@@ -51,5 +58,14 @@ public class order_and_pick_up {
 				}
 			}
 			return b;
+}
+	public static boolean isValid(String[] ingredients, String ingredientName) {
+		boolean b = false;
+		for (int i = 0; i < ingredients.length; i++) {
+			if (ingredients[i].equals(ingredientName)) {
+				b = true;
+			}
+		}
+		return b;
 }
 }
