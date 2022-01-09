@@ -14,6 +14,24 @@ public class order_and_pick_up {
 		String[] phoneNumbers = { "0631111111", "063222222", "063333333", "064444444", "065555555", "066666666" };
 		double totalPrice = 0;
 		String phone = "0";
+		System.out.println("Izvolite!");
+		System.out.print("Izaberite sastojke za pastu: ");
+		String ingredientName = "";
+		ingredientName = s.nextLine();
+		while (!ingredientName.equals("Poruci")) {
+				int priceIndex = findIngredient(ingredients, ingredientName);
+				totalPrice = totalPrice + price[priceIndex];
+				System.out.print("Izaberite sastojke za pastu: ");
+				ingredientName = s.nextLine();
+			}
+		System.out.print("Unesite vas broj telefona: ");
+		phone = s.next();
+		if (isRegularCustomer(phoneNumbers, phone)) {
+			totalPrice=0.9*totalPrice;
+		}
+		
+		System.out.println("Vasa pasta iznosi " + totalPrice);
+		System.out.println("Prijatno!");
 
 	}
 	public static int findIngredient(String[] ingredients, String ingredientName) {
@@ -24,6 +42,14 @@ public class order_and_pick_up {
 			}
 		}
 		return priceIndex;
-
+}
+	public static boolean isRegularCustomer(String[] phoneNumbers, String phone) {
+		boolean b = false;
+		for (int i = 0; i < phoneNumbers.length; i++) {
+			if (phoneNumbers[i].equals(phone)) {
+					b = true;
+				}
+			}
+			return b;
 }
 }
